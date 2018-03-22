@@ -1,0 +1,19 @@
+﻿version: '1.0.{build}'
+image: ubuntu
+before_build:
+    - ps: dotnet restore ./DockerTest/DockerTest.csproj
+
+build_script:
+    - ps: dotnet publish -c Release
+    - ps: docker build -f ./DockerTest/Dockerfile -t dockertest ./Dockertest
+
+deploy_script:
+- ps: >-
+    $tag = $env:APPVEYOR_BUILD_VERSION
+
+    docker login -u="$env:DOCKER_USER" -p="$env:DOCKER_PASSWORD"
+
+    docker tag dockertest niceprogramming/dockertest:$tag
+
+    docker push niceprogramming/dockertest:$tag
+    
