@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace DockerTest
 {
@@ -6,7 +9,20 @@ namespace DockerTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var config = Environment.GetEnvironmentVariable("CONFIG_LOCATION");
+            try
+            {
+                Console.WriteLine("Hello World!");
+                Console.WriteLine(string.Join(",",Directory.EnumerateDirectories(Directory.GetCurrentDirectory())));
+                Console.WriteLine(File.Exists("/test/test.txt"));
+                File.WriteAllText(config, "hello world");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+       
         }
     }
 }
