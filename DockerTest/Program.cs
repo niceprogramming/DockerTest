@@ -9,6 +9,8 @@ namespace DockerTest
     {
         static void Main(string[] args)
         {
+            int? stuff = 3;
+            var moreStuff = stuff ?? 5;
             var config = Environment.GetEnvironmentVariable("CONFIG_LOCATION");
             try
             {

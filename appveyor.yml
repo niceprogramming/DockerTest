@@ -1,11 +1,11 @@
 ﻿version: '1.0.{build}'
 image: ubuntu
 before_build:
-    - ps: dotnet restore ./DockerTest/DockerTest.csproj
+    - ps: dotnet restore /DockerTest/DockerTest.csproj
 
 build_script:
     - ps: dotnet publish -c Release
-    - ps: docker build -f ./DockerTest/Dockerfile -t dockertest ./Dockertest
+    - ps: docker build -f /DockerTest/Dockerfile -t dockertest /Dockertest
 
 deploy_script:
 - ps: >-
